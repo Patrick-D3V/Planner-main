@@ -5,7 +5,9 @@
 body{
   height: 100%;
   width: 100%;
+  background: #1565C0;
 }
+
 .app{  
   display: flex;
   position: fixed;
@@ -254,7 +256,8 @@ input:last-child{
   width: 320px;
   padding: 10px;
   margin: 5px;
-  margin-right: 45px;
+  /*margin-right: 45px;*/
+  margin-right: 20px;
   background-color: #f3f3f3;
   box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
 }

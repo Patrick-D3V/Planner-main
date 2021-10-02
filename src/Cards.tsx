@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
+import { IWebservice } from "./Interfaces";
 import { applyDrag, generateItems } from "./Utils";
 
 const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
 
-const columnNames = ["Lorem", "Ipsum", "Consectetur", "Eiusmod"];
+var columnNames = ["Lorem", "Ipsum", "Consectetur", "Eiusmod"];
 
 const cardColors = [
   "azure",
@@ -26,55 +27,36 @@ const pickColor = () => {
 };
 
 export interface Props {
-    children?: React.ReactNode
+  oWebservice?: IWebservice
 }
-
-export interface TasksContainer{
-    id: string,
-    type: string,
-    name: string,
-    props: {
-        orientation: string,
-        className: string
-    },
-    children: Tasks
-}
-
-export interface Tasks{
-    type: string,
-    id: string,
-    props:{
-        className: string,
-        style: string
-    },
-    data: string
-}
-
 export interface State {
-    scene: {
-        type: string,
-        props: {
-            orientation: string
-        },
-        children:any
-    }
+  scene: {
+    type: string,
+    props: {
+      orientation: string
+    },
+    children: any
+  }
 }
 
 class Cards extends React.Component<Props, State> {
-  constructor(pProps:Props) {
+  constructor(p_oPros: Props) {
 
-    super(pProps);
+    super(p_oPros);
 
     this.onColumnDrop = this.onColumnDrop.bind(this);
     this.onCardDrop = this.onCardDrop.bind(this);
     this.getCardPayload = this.getCardPayload.bind(this);
+
+    columnNames = p_oPros.oWebservice?.fGetLists();
+
     this.state = {
       scene: {
         type: "container",
         props: {
           orientation: "horizontal"
         },
-        children: generateItems(4, (i:any) => ({
+        children: generateItems(5, (i: any) => ({
           id: `column${i}`,
           type: "container",
           name: columnNames[i],
@@ -82,15 +64,15 @@ class Cards extends React.Component<Props, State> {
             orientation: "vertical",
             className: "card-container"
           },
-          children: generateItems(+(Math.random() * 10).toFixed() + 5, (j:any) => ({
+          children: [{
             type: "draggable",
-            id: `${i}${j}`,
+            id: `test${i}`,
             props: {
               className: "card",
-              style: { backgroundColor: pickColor() }
+              style: { backgroundColor: "white" }
             },
             data: lorem.slice(0, Math.floor(Math.random() * 150) + 30)
-          }))
+          }]
         }))
       }
     };
@@ -108,12 +90,12 @@ class Cards extends React.Component<Props, State> {
             className: 'cards-drop-preview'
           }}
         >
-          {this.state.scene.children.map((column:any):any => {
+          {this.state.scene.children.map((column: any): any => {
             return (
               <Draggable key={column.id}>
                 <div className={column.props.className}>
                   <div className="card-column-header">
-                    
+
                     {column.name}
                   </div>
                   <Container
@@ -134,14 +116,14 @@ class Cards extends React.Component<Props, State> {
                       console.log("drag leave:", column.id);
                     }}
                     onDropReady={p => console.log('Drop ready: ', p)}
-                    dropPlaceholder={{                      
+                    dropPlaceholder={{
                       animationDuration: 150,
                       showOnTop: true,
-                      className: 'drop-preview' 
+                      className: 'drop-preview'
                     }}
                     dropPlaceholderAnimationDuration={200}
                   >
-                    {column.children.map((card:any):any => {
+                    {column.children.map((card: any): any => {
                       return (
                         <Draggable key={card.id}>
                           <div {...card.props}>
@@ -160,13 +142,13 @@ class Cards extends React.Component<Props, State> {
     );
   }
 
-  getCardPayload(columnId:any, index:any) {
-    return this.state.scene.children.filter((p:any):any => p.id === columnId)[0].children[
+  getCardPayload(columnId: any, index: any) {
+    return this.state.scene.children.filter((p: any): any => p.id === columnId)[0].children[
       index
     ];
   }
 
-  onColumnDrop(dropResult:any) {
+  onColumnDrop(dropResult: any) {
     const scene = Object.assign({}, this.state.scene);
     scene.children = applyDrag(scene.children, dropResult);
     this.setState({
@@ -174,10 +156,10 @@ class Cards extends React.Component<Props, State> {
     });
   }
 
-  onCardDrop(columnId:any, dropResult:any) {
+  onCardDrop(columnId: any, dropResult: any) {
     if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
       const scene = Object.assign({}, this.state.scene);
-      const column = scene.children.filter((p:any):any => p.id === columnId)[0];
+      const column = scene.children.filter((p: any): any => p.id === columnId)[0];
       const columnIndex = scene.children.indexOf(column);
 
       const newColumn = Object.assign({}, column);
