@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "add_to_node_modules/react-smooth-dnd", "add_to_node_modules/smooth-dnd"  ]
 }
