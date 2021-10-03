@@ -447,3 +447,7 @@ input:last-child{
   border: 1px dashed #abc;
   margin: 5px 45px 5px 5px;
 }
+
+.noUnderlineInput > div::before{
+    border-bottom: none !important;
+}

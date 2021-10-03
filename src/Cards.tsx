@@ -1,10 +1,9 @@
-import { Button, IconButton, TextField } from "@mui/material";
+import { Button, Chip, IconButton, TextField } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { IWebservice, ITasksContainer } from "./Interfaces";
 import { applyDrag, generateItems } from "./Utils";
-import AddIcon from '@mui/icons-material/Add';
-import { ConstructionOutlined } from "@mui/icons-material";
+import { Add, TagFaces, ConstructionOutlined } from '@mui/icons-material';
 
 const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
@@ -115,33 +114,35 @@ class Cards extends React.Component<Props, State> {
                                             return (
                                                 <Draggable key={card.id}>
                                                     <div {...card.props}>
-                                                        <p>{card.parentId}</p>
-                                                        {/* <TextField
-                                                            id="standard-basic"
-                                                            label="Standard"
+                                                        {/* <p>{card.parentId}</p> */}
+                                                        <div>
+                                                            <Chip label="Test Label" color="info" size="small" icon={<TagFaces />} onDelete={() => { }} />
+                                                        </div>
+                                                        <TextField
                                                             variant="standard"
                                                             value={card.data}
+                                                            className="noUnderlineInput"
                                                             onChange={(p_Event) => {
 
                                                                 const scene = Object.assign({}, this.state.scene);
                                                                 card.data = p_Event.target.value
                                                                 this.setState({ scene });
                                                             }}
-                                                        /> */}
+                                                        />
                                                     </div>
                                                 </Draggable>
                                             );
                                         })}
                                     </Container>
                                     <div className="ContainerFooter">
-                                        <IconButton aria-label="delete" onClick={() => {
+                                        <Button startIcon={<Add />} onClick={() => {
 
                                             const scene = Object.assign({}, this.state.scene);
                                             column.fAddTask();
                                             this.setState({ scene });
                                         }} >
-                                            <AddIcon />
-                                        </IconButton>
+                                            Neue Karte
+                                        </Button>
                                     </div>
                                 </div>
                             </Draggable>
