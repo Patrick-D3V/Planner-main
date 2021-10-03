@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { IWebservice, ITasksContainer } from "./Interfaces";
@@ -89,21 +89,21 @@ class Cards extends React.Component<Props, State> {
                                     <Container
                                         {...column.props}
                                         groupName="col"
-                                        onDragStart={e => console.log("drag started", e)}
-                                        onDragEnd={e => console.log("drag end", e)}
+                                        // onDragStart={e => console.log("drag started", e)}
+                                        // onDragEnd={e => console.log("drag end", e)}
                                         onDrop={e => this.onCardDrop(column.id, e)}
                                         getChildPayload={index =>
                                             this.getCardPayload(column.id, index)
                                         }
                                         dragClass="card-ghost"
                                         dropClass="card-ghost-drop"
-                                        onDragEnter={() => {
-                                            console.log("drag enter:", column.id);
-                                        }}
-                                        onDragLeave={() => {
-                                            console.log("drag leave:", column.id);
-                                        }}
-                                        onDropReady={p => console.log('Drop ready: ', p)}
+                                        // onDragEnter={() => {
+                                        //     console.log("drag enter:", column.id);
+                                        // }}
+                                        // onDragLeave={() => {
+                                        //     console.log("drag leave:", column.id);
+                                        // }}
+                                        // onDropReady={p => console.log('Drop ready: ', p)}
                                         dropPlaceholder={{
                                             animationDuration: 150,
                                             showOnTop: true,
@@ -115,7 +115,19 @@ class Cards extends React.Component<Props, State> {
                                             return (
                                                 <Draggable key={card.id}>
                                                     <div {...card.props}>
-                                                        <p>{card.data}</p>
+                                                        <p>{card.parentId}</p>
+                                                        {/* <TextField
+                                                            id="standard-basic"
+                                                            label="Standard"
+                                                            variant="standard"
+                                                            value={card.data}
+                                                            onChange={(p_Event) => {
+
+                                                                const scene = Object.assign({}, this.state.scene);
+                                                                card.data = p_Event.target.value
+                                                                this.setState({ scene });
+                                                            }}
+                                                        /> */}
                                                     </div>
                                                 </Draggable>
                                             );
@@ -155,16 +167,19 @@ class Cards extends React.Component<Props, State> {
     }
 
     onCardDrop(columnId: any, dropResult: any) {
+        console.log("onCardDrop", columnId, dropResult);
         const scene = Object.assign({}, this.state.scene);
-        const draggedTask = dropResult.payload;
-        const oParent: ITasksContainer = scene.children.filter((p: any): any => p.id === columnId)[0];
-        if (dropResult.removedIndex !== null) {
+        if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
 
-            oParent.fRemoveTask(draggedTask);
-        }
-        if (dropResult.addedIndex !== null) {
+            const draggedTask = dropResult.payload;
+            const oParent: ITasksContainer = scene.children.filter((p: any): any => p.id === columnId)[0];
 
-            oParent.fAddTask(draggedTask);
+            if (dropResult.addedIndex !== null) {
+
+                draggedTask.parentId = oParent.id;
+            }
+            oParent.children = applyDrag(oParent.children, dropResult);
+
         }
         this.setState({ scene });
     }
