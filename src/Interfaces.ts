@@ -1,26 +1,35 @@
-export interface IWebservice{
+import { CSSProperties } from "react";
 
-    fGetLists(p_nUserID?:number):any;
-    fGetTasks(p_nListID:number):any;
+export interface IWebservice {
+
+    fGetLists(p_nUserID?: string): any;
+    fGetTasks(p_nListID: string): any;
 }
 
 export interface ITasksContainer {
-    id: number,
+    id: string,
     type: string,
     name: string,
     props: {
-      orientation: string,
-      className: string
+        orientation: string,
+        className: string
     },
-    children?: ITasks
-  }
-  
+    children?: Array<ITasks>,
+    fAddTask: Function,
+    fRemoveTask: Function
+}
+
 export interface ITasks {
-    type: string,
     id: string,
+    parentId: string,
+    type: string,
     props: {
         className: string,
-        style: string
+        style: CSSProperties
     },
     data: string
+}
+export interface ITaskListProps {
+    orientation: string,
+    className: string
 }
