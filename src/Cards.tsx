@@ -1,7 +1,7 @@
 import { Button, Chip, IconButton, TextField } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
-import { IWebservice, ITasksContainer } from "./Interfaces";
+import { IWebservice, ITasksContainer, eSaveType } from "./Interfaces";
 import { applyDrag, generateItems } from "./Utils";
 import { Add, TagFaces, ConstructionOutlined } from '@mui/icons-material';
 
@@ -65,6 +65,15 @@ class Cards extends React.Component<Props, State> {
         };
     }
 
+    public fSetState(p_oState: any,) {
+
+        this.setState(p_oState);
+        if (this.props.oWebservice?.saveType === eSaveType.Complete) {
+
+            this.props.oWebservice.fSave(this.state.scene.children);
+        }
+    }
+
     render() {
         return (
             <div className="card-scene">
@@ -109,6 +118,7 @@ class Cards extends React.Component<Props, State> {
                                             className: 'drop-preview'
                                         }}
                                         dropPlaceholderAnimationDuration={200}
+                                        style={{ maxHeight: "80vh", overflowY: "auto" }}
                                     >
                                         {column.children.map((card: any): any => {
                                             return (
@@ -126,7 +136,7 @@ class Cards extends React.Component<Props, State> {
 
                                                                 const scene = Object.assign({}, this.state.scene);
                                                                 card.data = p_Event.target.value
-                                                                this.setState({ scene });
+                                                                this.fSetState({ scene });
                                                             }}
                                                         />
                                                     </div>
@@ -139,7 +149,7 @@ class Cards extends React.Component<Props, State> {
 
                                             const scene = Object.assign({}, this.state.scene);
                                             column.fAddTask();
-                                            this.setState({ scene });
+                                            this.fSetState({ scene });
                                         }} >
                                             Neue Karte
                                         </Button>
@@ -149,7 +159,7 @@ class Cards extends React.Component<Props, State> {
                         );
                     })}
                 </Container>
-            </div>
+            </div >
         );
     }
 
@@ -162,9 +172,7 @@ class Cards extends React.Component<Props, State> {
     onColumnDrop(dropResult: any) {
         const scene = Object.assign({}, this.state.scene);
         scene.children = applyDrag(scene.children, dropResult);
-        this.setState({
-            scene
-        });
+        this.fSetState({ scene });
     }
 
     onCardDrop(columnId: any, dropResult: any) {
@@ -182,7 +190,7 @@ class Cards extends React.Component<Props, State> {
             oParent.children = applyDrag(oParent.children, dropResult);
 
         }
-        this.setState({ scene });
+        this.fSetState({ scene });
     }
 }
 

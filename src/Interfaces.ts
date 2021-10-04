@@ -4,6 +4,8 @@ export interface IWebservice {
 
     fGetLists(p_nUserID?: string): any;
     fGetTasks(p_nListID: string): any;
+    fSave(p_oData: any): any;
+    saveType: eSaveType;
 }
 
 export interface ITasksContainer {
@@ -32,4 +34,9 @@ export interface ITasks {
 export interface ITaskListProps {
     orientation: string,
     className: string
+}
+
+export enum eSaveType {
+    Single,
+    Complete
 }
