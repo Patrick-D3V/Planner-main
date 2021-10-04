@@ -65,9 +65,9 @@ class Cards extends React.Component<Props, State> {
         };
     }
 
-    public fSetState(p_oState: any,) {
+    public fSetState(p_oState: any, p_fCallback: any = () => { }) {
 
-        this.setState(p_oState);
+        this.setState(p_oState, p_fCallback);
         if (this.props.oWebservice?.saveType === eSaveType.Complete) {
 
             this.props.oWebservice.fSave(this.state.scene.children);
@@ -123,12 +123,14 @@ class Cards extends React.Component<Props, State> {
                                         {column.children.map((card: any): any => {
                                             return (
                                                 <Draggable key={card.id}>
-                                                    <div {...card.props}>
+                                                    <div id={"t" + card.id} {...card.props}>
                                                         {/* <p>{card.parentId}</p> */}
                                                         <div>
-                                                            <Chip label="Test Label" color="info" size="small" icon={<TagFaces />} onDelete={() => { }} />
+                                                            <Chip label="Planner" color="info" size="small" icon={<TagFaces />} />
                                                         </div>
                                                         <TextField
+                                                            multiline
+                                                            fullWidth
                                                             variant="standard"
                                                             value={card.data}
                                                             className="noUnderlineInput"
@@ -148,8 +150,12 @@ class Cards extends React.Component<Props, State> {
                                         <Button startIcon={<Add />} onClick={() => {
 
                                             const scene = Object.assign({}, this.state.scene);
-                                            column.fAddTask();
-                                            this.fSetState({ scene });
+                                            var oTask = column.fAddTask();
+                                            this.fSetState({ scene }, function () {
+
+                                                let oElem: any = document.querySelector("#t" + oTask.id + " textarea");
+                                                oElem.focus();
+                                            });
                                         }} >
                                             Neue Karte
                                         </Button>

@@ -97,16 +97,20 @@ export default class CTaskList {
         this._children = value;
     }
 
-    public fAddTask(p_oTask?: ITasks) {
+    public fAddTask(p_oTask?: ITasks): ITasks {
 
+        let oTask: ITasks;
         if (p_oTask) {
 
+            oTask = p_oTask;
             p_oTask.parentId = this.id;
-            this.children.push(p_oTask);
         } else {
 
-            this.children.push(new CTask((Math.random() + 1).toString(36).substring(7), this.id, "draggable", { className: "card", style: { background: "white" } }, "Ohne Titel"));
+            oTask = new CTask((Math.random() + 1).toString(36).substring(7), this.id, "draggable", { className: "card", style: { background: "white" } }, "");
         }
+        this.children.push(oTask);
+
+        return oTask;
     }
 
     public fRemoveTask(p_oTask: ITasks) {
