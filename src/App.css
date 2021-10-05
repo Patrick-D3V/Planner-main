@@ -264,11 +264,12 @@ input:last-child{
 }
 
 .card{
-  margin: 5px;
-  /* border: 1px solid #ccc; */
-  background-color: white;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-  padding: 10px;
+    position: relative;
+    margin: 5px;
+    /* border: 1px solid #ccc; */
+    background-color: white;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+    padding: 10px;
 }
 
 .card-column-header{
@@ -451,4 +452,10 @@ input:last-child{
 
 .noUnderlineInput > div::before{
     border-bottom: none !important;
+}
+
+.vmenu{
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
