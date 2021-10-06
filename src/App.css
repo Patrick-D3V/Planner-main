@@ -5,7 +5,7 @@
 body{
   height: 100%;
   width: 100%;
-  background: #1565C0;
+  background: linear-gradient(to right,#2193b0, #6dd5ed);
   overflow-y: hidden;
 }
 
@@ -264,6 +264,7 @@ input:last-child{
 }
 
 .card{
+    border-radius: 4px;
     position: relative;
     margin: 5px;
     /* border: 1px solid #ccc; */

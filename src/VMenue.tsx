@@ -34,6 +34,7 @@ const options = [
     {
         icon: <DeleteForever />,
         text: 'Löschen',
+        enabled: true
     },
 ];
 
@@ -41,12 +42,12 @@ const StyledMenu = styled((props: MenuProps) => (
     <Menu
         elevation={0}
         anchorOrigin={{
-            vertical: 'bottom',
+            vertical: 'top',
             horizontal: 'right',
         }}
         transformOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'left',
         }}
         {...props}
     />
@@ -116,7 +117,7 @@ export default function VMenue() {
                 }}
             >
                 {options.map((option) => (
-                    <MenuItem key={option.text} onClick={handleClose} disableRipple>
+                    <MenuItem key={option.text} onClick={handleClose} disableRipple disabled={!option.enabled ?? false}>
                         {option.icon}
                         {option.text}
                     </MenuItem>

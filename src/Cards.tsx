@@ -6,29 +6,6 @@ import { applyDrag, generateItems } from "./Utils";
 import { Add, TagFaces, ConstructionOutlined } from '@mui/icons-material';
 import VMenue from "./VMenue";
 
-const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
-
-var columnNames = ["Lorem", "Ipsum", "Consectetur", "Eiusmod"];
-
-const cardColors = [
-    "azure",
-    "beige",
-    "bisque",
-    "blanchedalmond",
-    "burlywood",
-    "cornsilk",
-    "gainsboro",
-    "ghostwhite",
-    "ivory",
-    "khaki"
-];
-const pickColor = () => {
-    let rand = Math.floor(Math.random() * 10);
-    return cardColors[rand];
-};
-
 export interface Props {
     oWebservice?: IWebservice
 }
@@ -41,25 +18,6 @@ export interface State {
         children: any
     }
 }
-
-const options = [
-    'None',
-    'Atria',
-    'Callisto',
-    'Dione',
-    'Ganymede',
-    'Hangouts Call',
-    'Luna',
-    'Oberon',
-    'Phobos',
-    'Pyxis',
-    'Sedna',
-    'Titania',
-    'Triton',
-    'Umbriel',
-];
-
-const ITEM_HEIGHT = 48;
 
 class Cards extends React.Component<Props, State> {
     constructor(p_oPros: Props) {
@@ -146,22 +104,24 @@ class Cards extends React.Component<Props, State> {
                                                     <div id={"t" + card.id} {...card.props}>
                                                         <VMenue />
                                                         {/* <p>{card.parentId}</p> */}
-                                                        <div>
+                                                        {/* <div>
                                                             <Chip label="Planner" color="info" size="small" icon={<TagFaces />} />
-                                                        </div>
-                                                        <TextField
-                                                            multiline
-                                                            fullWidth
-                                                            variant="standard"
-                                                            value={card.data}
-                                                            className="noUnderlineInput"
-                                                            onChange={(p_Event) => {
+                                                        </div> */}
+                                                        <div style={{ width: "calc(100% - 40px)" }}>
+                                                            <TextField
+                                                                multiline
+                                                                fullWidth
+                                                                variant="standard"
+                                                                value={card.data}
+                                                                className="noUnderlineInput"
+                                                                onChange={(p_Event) => {
 
-                                                                const scene = Object.assign({}, this.state.scene);
-                                                                card.data = p_Event.target.value
-                                                                this.fSetState({ scene });
-                                                            }}
-                                                        />
+                                                                    const scene = Object.assign({}, this.state.scene);
+                                                                    card.data = p_Event.target.value
+                                                                    this.fSetState({ scene });
+                                                                }}
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </Draggable>
                                             );
