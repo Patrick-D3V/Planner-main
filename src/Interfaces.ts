@@ -29,7 +29,8 @@ export interface ITasks {
         className: string,
         style: CSSProperties
     },
-    data: string
+    data: string,
+    labels: Array<ITaskLabel>
 }
 export interface ITaskListProps {
     orientation: string,
@@ -39,4 +40,10 @@ export interface ITaskListProps {
 export enum eSaveType {
     Single,
     Complete
+}
+
+export interface ITaskLabel {
+    id: string,
+    text: string,
+    color: string
 }

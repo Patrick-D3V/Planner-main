@@ -6,36 +6,36 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Alarm, DeleteForever, DriveFileMove, FileCopy, LocalOffer, OpenInFull, Person } from '@mui/icons-material';
 import { alpha, styled } from '@mui/material/styles';
 
-const options = [
+const cardmenue = [
     {
         icon: <OpenInFull />,
-        text: 'Karte öffnen',
+        text: 'Karte öffnen'
     },
     {
         icon: <LocalOffer />,
-        text: 'Labels bearbeiten',
+        text: 'Labels bearbeiten'
     },
     {
         icon: <Person />,
-        text: 'Mitglieder ändern',
+        text: 'Mitglieder ändern'
     },
     {
         icon: <Alarm />,
-        text: 'Daten bearbeiten',
+        text: 'Daten bearbeiten'
     },
     {
         icon: <DriveFileMove />,
-        text: 'Verschieben',
+        text: 'Verschieben'
     },
     {
         icon: <FileCopy />,
-        text: 'Kopieren',
+        text: 'Kopieren'
     },
     {
         icon: <DeleteForever />,
         text: 'Löschen',
         enabled: true
-    },
+    }
 ];
 
 const StyledMenu = styled((props: MenuProps) => (
@@ -116,10 +116,10 @@ export default function VMenue() {
                     },
                 }}
             >
-                {options.map((option) => (
-                    <MenuItem key={option.text} onClick={handleClose} disableRipple disabled={!option.enabled ?? false}>
-                        {option.icon}
-                        {option.text}
+                {cardmenue.map((cardmenue) => (
+                    <MenuItem key={cardmenue.text} onClick={handleClose} disableRipple disabled={!cardmenue.enabled ?? false}>
+                        {cardmenue.icon}
+                        {cardmenue.text}
                     </MenuItem>
                 ))}
             </StyledMenu>
