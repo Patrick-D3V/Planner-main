@@ -1,4 +1,4 @@
-import { Button, Chip, IconButton, TextField } from "@mui/material";
+import { Button, Card, Chip, IconButton, TextField } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { IWebservice, ITasksContainer, eSaveType } from "./Interfaces";
@@ -67,7 +67,7 @@ class Cards extends React.Component<Props, State> {
                     {this.state.scene.children.map((column: any): any => {
                         return (
                             <Draggable key={column.id}>
-                                <div className={column.props.className}>
+                                <Card className={column.props.className}>
                                     <div className="card-column-header">
 
                                         {column.name}
@@ -101,7 +101,7 @@ class Cards extends React.Component<Props, State> {
                                         {column.children.map((card: any): any => {
                                             return (
                                                 <Draggable key={card.id}>
-                                                    <div id={"t" + card.id} {...card.props}>
+                                                    <Card id={"t" + card.id} {...card.props}>
                                                         <VMenue />
                                                         {/* <p>{card.parentId}</p> */}
                                                         {/* <div>
@@ -122,7 +122,7 @@ class Cards extends React.Component<Props, State> {
                                                                 }}
                                                             />
                                                         </div>
-                                                    </div>
+                                                    </Card>
                                                 </Draggable>
                                             );
                                         })}
@@ -141,7 +141,7 @@ class Cards extends React.Component<Props, State> {
                                             Neue Karte
                                         </Button>
                                     </div>
-                                </div>
+                                </Card>
                             </Draggable>
                         );
                     })}
