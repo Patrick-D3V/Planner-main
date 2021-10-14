@@ -8,6 +8,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Cards from './Cards';
 import CLocalStorage from './Classes/Webservices/CLocalStorage';
 import { eSaveType, IWebservice } from './Interfaces';
+import { amber, deepOrange, grey } from '@mui/material/colors';
 
 const oWebservice: IWebservice = new CLocalStorage(eSaveType.Complete);
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
@@ -35,11 +36,35 @@ export default function ToggleColorMode() {
         [],
     );
 
+    // TODO: Create Themes
     const theme = React.useMemo(
         () =>
             createTheme({
                 palette: {
                     mode,
+                    ...(mode === 'light'
+                        ? {
+                            // palette values for light mode
+                            primary: amber,
+                            divider: amber[200],
+                            text: {
+                                primary: grey[900],
+                                secondary: grey[800],
+                            },
+                        }
+                        : {
+                            // palette values for dark mode
+                            primary: deepOrange,
+                            divider: deepOrange[700],
+                            background: {
+                                default: deepOrange[900],
+                                paper: deepOrange[900],
+                            },
+                            text: {
+                                primary: '#fff',
+                                secondary: grey[500],
+                            },
+                        }),
                 },
             }),
         [mode],
