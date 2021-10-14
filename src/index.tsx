@@ -6,31 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { StyledEngineProvider } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
-    interface Theme {
-        status: {
-            danger: React.CSSProperties['color'];
-        };
-    }
-
     interface Palette {
-        neutral: Palette['primary'];
+      neutral: Palette['primary'];
     }
+  
+    // allow configuration using `createTheme`
     interface PaletteOptions {
-        neutral: PaletteOptions['primary'];
+      neutral?: PaletteOptions['primary'];
     }
-
-    interface PaletteColor {
-        darker?: string;
-    }
-    interface SimplePaletteColorOptions {
-        darker?: string;
-    }
-    interface ThemeOptions {
-        status: {
-            danger: React.CSSProperties['color'];
-        };
-    }
-}
+  }
 
 ReactDOM.render(
     <React.StrictMode>

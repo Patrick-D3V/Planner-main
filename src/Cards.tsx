@@ -68,7 +68,7 @@ class Cards extends React.Component<Props, State> {
                         return (
                             <Draggable key={column.id}>
                                 <Card className={column.props.className} sx={{
-                                    bgcolor: "background.paper",
+                                    bgcolor: "neutral.main",
                                 }}>
                                     <div className="card-column-header">
 
