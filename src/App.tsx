@@ -47,7 +47,7 @@ export default function ToggleColorMode() {
                             // palette values for light mode
                             primary: blue,
                             neutral: {
-                                main: '#64748B',
+                                main: '#f3f3f3',
                                 contrastText: '#fff'
                             }
                         }
@@ -55,7 +55,7 @@ export default function ToggleColorMode() {
                             // palette values for dark mode
                             primary: pink,
                             neutral: {
-                                main: '#64748B',
+                                main: '#1a1a1a',
                                 contrastText: '#fff'
                             }
                         }),
