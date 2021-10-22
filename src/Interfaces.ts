@@ -30,7 +30,8 @@ export interface ITasks {
         style: CSSProperties
     },
     data: string,
-    labels: Array<ITaskLabel>
+    labels: Array<ITaskLabel>,
+    fDelete: Function
 }
 export interface ITaskListProps {
     orientation: string,

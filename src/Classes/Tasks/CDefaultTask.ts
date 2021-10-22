@@ -116,4 +116,13 @@ export default class CTask implements ITasks {
     public set labels(value: Array<ITaskLabel>) {
         this._labels = value;
     }
+
+    public fDelete(): void {
+
+        const index: number = this.parent.children?.indexOf(this, 0) ?? -1;
+        if (index > -1 && this.parent.children) {
+
+            this.parent.children.splice(index, 1);
+        }
+    }
 }

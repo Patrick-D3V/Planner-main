@@ -106,7 +106,7 @@ class Cards extends React.Component<Props, State> {
                                             return (
                                                 <Draggable key={card.id}>
                                                     <Paper id={"t" + card.id} {...card.props}>
-                                                        <VMenue taskcard={card} />
+                                                        <VMenue taskcard={card} callback={this.updateGUI.bind(this)} />
                                                         <div style={{ width: "calc(100% - 40px)" }}>
                                                             <TextField
                                                                 multiline
@@ -177,6 +177,12 @@ class Cards extends React.Component<Props, State> {
             oParent.children = applyDrag(oParent.children, dropResult);
 
         }
+        this.fSetState({ scene });
+    }
+
+    updateGUI() {
+
+        const scene = Object.assign({}, this.state.scene);
         this.fSetState({ scene });
     }
 }

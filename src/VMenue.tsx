@@ -7,6 +7,42 @@ import { Alarm, DeleteForever, DriveFileMove, FileCopy, LocalOffer, OpenInFull, 
 import { alpha, styled } from '@mui/material/styles';
 import { ITasks } from './Interfaces';
 
+const cardmenue = [
+    // {
+    //     icon: <OpenInFull />,
+    //     text: 'Karte öffnen'
+    // },
+    // {
+    //     icon: <LocalOffer />,
+    //     text: 'Labels bearbeiten'
+    // },
+    // {
+    //     icon: <Person />,
+    //     text: 'Mitglieder ändern'
+    // },
+    // {
+    //     icon: <Alarm />,
+    //     text: 'Daten bearbeiten'
+    // },
+    // {
+    //     icon: <DriveFileMove />,
+    //     text: 'Verschieben'
+    // },
+    // {
+    //     icon: <FileCopy />,
+    //     text: 'Kopieren'
+    // },
+    {
+        icon: <DeleteForever />,
+        text: 'Löschen',
+        enabled: true,
+        action: function (oCard: ITasks) {
+
+            oCard.fDelete();
+        }
+    }
+];
+
 const StyledMenu = styled((props: MenuProps) => (
     <Menu
         elevation={0}
@@ -49,7 +85,8 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 
 interface MyProps {
-    taskcard: ITasks
+    taskcard: ITasks,
+    callback: Function
 }
 
 
@@ -89,12 +126,20 @@ export default function VMenue(p_oProps: React.PropsWithChildren<MyProps>): JSX.
                     },
                 }}
             >
-                {/* {cardmenue.map((cardmenue) => (
-                    <MenuItem key={cardmenue.text} onClick={handleClose} disableRipple disabled={!cardmenue.enabled ?? false}>
+                {cardmenue.map((cardmenue) => (
+                    <MenuItem key={cardmenue.text} onClick={function () {
+
+                        if (cardmenue.action) {
+
+                            cardmenue.action(p_oProps.taskcard);
+                            p_oProps.callback();
+                        }
+                        handleClose();
+                    }} disableRipple disabled={!cardmenue.enabled ?? false}>
                         {cardmenue.icon}
                         {cardmenue.text}
                     </MenuItem>
-                ))} */}
+                ))}
                 {p_oProps.children}
             </StyledMenu>
         </div>
