@@ -73,8 +73,18 @@ class Cards extends React.Component<Props, State> {
                                     bgcolor: "neutral.main",
                                 }}>
                                     <div className="card-column-header">
+                                        <TextField
+                                            fullWidth
+                                            variant="standard"
+                                            value={column.name}
+                                            className="noUnderlineInput"
+                                            onChange={(p_Event) => {
 
-                                        {column.name}
+                                                const scene = Object.assign({}, this.state.scene);
+                                                column.name = p_Event.target.value
+                                                this.fSetState({ scene });
+                                            }}
+                                        />
                                     </div>
                                     <Container
                                         {...column.props}
