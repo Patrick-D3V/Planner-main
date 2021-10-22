@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { ITaskLabel, ITasks } from "../../Interfaces";
+import { ITaskLabel, ITasks, ITasksContainer } from "../../Interfaces";
 
 interface ITaskProps {
     className: string,
@@ -8,18 +8,18 @@ interface ITaskProps {
 
 export default class CTask implements ITasks {
 
-    constructor(p_nId: string, p_nParentId: string, p_sType: string, p_oProps: ITaskProps, p_sData: string, p_oLabels?: Array<ITaskLabel>) {
+    constructor(p_nId: string, p_nParent: ITasksContainer, p_sType: string, p_oProps: ITaskProps, p_sData: string, p_oLabels?: Array<ITaskLabel>) {
 
         this._type = p_sType;
         this._id = p_nId;
         this._props = p_oProps;
         this._data = p_sData;
-        this._parentId = p_nParentId;
+        this._parent = p_nParent;
         this._labels = p_oLabels ?? [];
     }
 
     private _type: string;
-    private _parentId: string;
+    private _parent: ITasksContainer;
     private _id: string;
     private _props: {
         className: string,
@@ -73,8 +73,8 @@ export default class CTask implements ITasks {
      * Getter children
      * @return {string}
      */
-    public get parentId(): string {
-        return this._parentId;
+    public get parent(): ITasksContainer {
+        return this._parent;
     }
 
     /**
@@ -109,8 +109,8 @@ export default class CTask implements ITasks {
         this._props = value;
     }
 
-    public set parentId(value: string) {
-        this._parentId = value;
+    public set parent(value: ITasksContainer) {
+        this._parent = value;
     }
 
     public set labels(value: Array<ITaskLabel>) {

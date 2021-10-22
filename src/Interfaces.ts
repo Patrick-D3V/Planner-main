@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 export interface IWebservice {
 
     fGetLists(p_nUserID?: string): any;
-    fGetTasks(p_nListID: string): any;
+    fGetTasks(p_nListID: any): any;
     fSave(p_oData: any): any;
     saveType: eSaveType;
 }
@@ -23,7 +23,7 @@ export interface ITasksContainer {
 
 export interface ITasks {
     id: string,
-    parentId: string,
+    parent: ITasksContainer,
     type: string,
     props: {
         className: string,

@@ -103,10 +103,10 @@ export default class CTaskList {
         if (p_oTask) {
 
             oTask = p_oTask;
-            p_oTask.parentId = this.id;
+            p_oTask.parent = this;
         } else {
 
-            oTask = new CTask((Math.random() + 1).toString(36).substring(7), this.id, "draggable", { className: "card", style: { background: "white" } }, "");
+            oTask = new CTask((Math.random() + 1).toString(36).substring(7), this, "draggable", { className: "card", style: { background: "white" } }, "");
         }
         this.children.push(oTask);
 

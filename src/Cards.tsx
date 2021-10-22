@@ -1,9 +1,9 @@
-import { Button, Card, Chip, IconButton, Paper, TextField } from "@mui/material";
+import { Button, Card, Chip, IconButton, MenuItem, Paper, TextField } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { IWebservice, ITasksContainer, eSaveType } from "./Interfaces";
 import { applyDrag, generateItems } from "./Utils";
-import { Add, TagFaces, ConstructionOutlined } from '@mui/icons-material';
+import { Add, TagFaces, ConstructionOutlined, Alarm, DeleteForever, DriveFileMove, FileCopy, LocalOffer, OpenInFull, Person } from '@mui/icons-material';
 import VMenue from "./VMenue";
 
 export interface Props {
@@ -41,6 +41,8 @@ class Cards extends React.Component<Props, State> {
                 children: p_oPros.oWebservice?.fGetLists()
             }
         };
+        //@ts-ignore
+        window["scene"] = this.state;
     }
 
     public fSetState(p_oState: any, p_fCallback: any = () => { }) {
@@ -104,11 +106,7 @@ class Cards extends React.Component<Props, State> {
                                             return (
                                                 <Draggable key={card.id}>
                                                     <Paper id={"t" + card.id} {...card.props}>
-                                                        <VMenue />
-                                                        {/* <p>{card.parentId}</p> */}
-                                                        {/* <div>
-                                                            <Chip label="Planner" color="info" size="small" icon={<TagFaces />} />
-                                                        </div> */}
+                                                        <VMenue taskcard={card} />
                                                         <div style={{ width: "calc(100% - 40px)" }}>
                                                             <TextField
                                                                 multiline
@@ -174,7 +172,7 @@ class Cards extends React.Component<Props, State> {
 
             if (dropResult.addedIndex !== null) {
 
-                draggedTask.parentId = oParent.id;
+                draggedTask.parent = oParent;
             }
             oParent.children = applyDrag(oParent.children, dropResult);
 

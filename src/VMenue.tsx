@@ -5,38 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Alarm, DeleteForever, DriveFileMove, FileCopy, LocalOffer, OpenInFull, Person } from '@mui/icons-material';
 import { alpha, styled } from '@mui/material/styles';
-
-const cardmenue = [
-    {
-        icon: <OpenInFull />,
-        text: 'Karte öffnen'
-    },
-    {
-        icon: <LocalOffer />,
-        text: 'Labels bearbeiten'
-    },
-    {
-        icon: <Person />,
-        text: 'Mitglieder ändern'
-    },
-    {
-        icon: <Alarm />,
-        text: 'Daten bearbeiten'
-    },
-    {
-        icon: <DriveFileMove />,
-        text: 'Verschieben'
-    },
-    {
-        icon: <FileCopy />,
-        text: 'Kopieren'
-    },
-    {
-        icon: <DeleteForever />,
-        text: 'Löschen',
-        enabled: true
-    }
-];
+import { ITasks } from './Interfaces';
 
 const StyledMenu = styled((props: MenuProps) => (
     <Menu
@@ -79,8 +48,12 @@ const StyledMenu = styled((props: MenuProps) => (
     },
 }));
 
+interface MyProps {
+    taskcard: ITasks
+}
 
-export default function VMenue() {
+
+export default function VMenue(p_oProps: React.PropsWithChildren<MyProps>): JSX.Element {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -116,12 +89,13 @@ export default function VMenue() {
                     },
                 }}
             >
-                {cardmenue.map((cardmenue) => (
+                {/* {cardmenue.map((cardmenue) => (
                     <MenuItem key={cardmenue.text} onClick={handleClose} disableRipple disabled={!cardmenue.enabled ?? false}>
                         {cardmenue.icon}
                         {cardmenue.text}
                     </MenuItem>
-                ))}
+                ))} */}
+                {p_oProps.children}
             </StyledMenu>
         </div>
     );
