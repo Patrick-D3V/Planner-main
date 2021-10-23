@@ -1,10 +1,11 @@
-import { Button, Card, Chip, IconButton, MenuItem, Paper, TextField } from "@mui/material";
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Chip, Collapse, IconButton, MenuItem, Paper, TextField, Typography } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { IWebservice, ITasksContainer, eSaveType } from "./Interfaces";
 import { applyDrag, generateItems } from "./Utils";
-import { Add, TagFaces, ConstructionOutlined, Alarm, DeleteForever, DriveFileMove, FileCopy, LocalOffer, OpenInFull, Person } from '@mui/icons-material';
+import { Add, TagFaces, ConstructionOutlined, Alarm, DeleteForever, DriveFileMove, FileCopy, LocalOffer, OpenInFull, Person, ExpandMore, Favorite, MoreVert, Share } from '@mui/icons-material';
 import VMenue from "./VMenue";
+import { red } from "@mui/material/colors";
 
 export interface Props {
     oWebservice?: IWebservice
@@ -69,7 +70,7 @@ class Cards extends React.Component<Props, State> {
                     {this.state.scene.children.map((column: any): any => {
                         return (
                             <Draggable key={column.id}>
-                                <Card className={column.props.className} sx={{
+                                <Card className={column.props.className + (column.children.length == 0 ? " emptycontainer" : "")} sx={{
                                     bgcolor: "neutral.main",
                                 }}>
                                     <div className="card-column-header">
@@ -110,29 +111,63 @@ class Cards extends React.Component<Props, State> {
                                             className: 'drop-preview'
                                         }}
                                         dropPlaceholderAnimationDuration={200}
-                                        style={{ maxHeight: "80vh", overflowY: "auto" }}
+                                        style={{ maxHeight: "80vh", overflowY: "auto", minHeight: "100px" }}
                                     >
                                         {column.children.map((card: any): any => {
                                             return (
                                                 <Draggable key={card.id}>
-                                                    <Paper id={"t" + card.id} {...card.props}>
-                                                        <VMenue taskcard={card} callback={this.updateGUI.bind(this)} />
-                                                        <div style={{ width: "calc(100% - 40px)" }}>
-                                                            <TextField
-                                                                multiline
-                                                                fullWidth
-                                                                variant="standard"
-                                                                value={card.data}
-                                                                className="noUnderlineInput"
-                                                                onChange={(p_Event) => {
+                                                    <Card id={"t" + card.id} {...card.props} sx={{ maxWidth: 345 }}>
+                                                        <CardHeader
+                                                            avatar={
+                                                                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                                                    R
+                                                                </Avatar>
+                                                            }
+                                                            action={
+                                                                <VMenue taskcard={card} callback={this.updateGUI.bind(this)} />
+                                                            }
+                                                            title={
+                                                                <TextField
+                                                                    multiline
+                                                                    fullWidth
+                                                                    variant="standard"
+                                                                    value={card.data}
+                                                                    className={"noUnderlineInput cardtitle"}
+                                                                    onChange={(p_Event) => {
 
-                                                                    const scene = Object.assign({}, this.state.scene);
-                                                                    card.data = p_Event.target.value
-                                                                    this.fSetState({ scene });
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    </Paper>
+                                                                        const scene = Object.assign({}, this.state.scene);
+                                                                        card.data = p_Event.target.value
+                                                                        this.fSetState({ scene });
+                                                                    }}
+                                                                />
+                                                            }
+                                                            subheader="September 14, 2016"
+                                                        />
+                                                        <CardMedia
+                                                            sx={{
+                                                                pointerEvents: "none"
+                                                            }}
+                                                            component="img"
+                                                            height="194"
+                                                            image="https://placekitten.com/300/200"
+                                                            alt="Paella dish"
+                                                        />
+                                                        <CardContent>
+                                                            <Typography variant="body2" color="text.secondary">
+                                                                This impressive paella is a perfect party dish and a fun meal to cook
+                                                                together with your guests. Add 1 cup of frozen peas along with the mussels,
+                                                                if you like.
+                                                            </Typography>
+                                                        </CardContent>
+                                                        <CardActions disableSpacing>
+                                                            <IconButton aria-label="add to favorites">
+                                                                <Favorite />
+                                                            </IconButton>
+                                                            <IconButton aria-label="share">
+                                                                <Share />
+                                                            </IconButton>
+                                                        </CardActions>
+                                                    </Card>
                                                 </Draggable>
                                             );
                                         })}
