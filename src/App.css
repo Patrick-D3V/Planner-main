@@ -457,3 +457,13 @@ input:last-child{
 .emptycontainer{
     /* background-color: black; */
 }
+
+.smooth-dnd-container{ 
+    max-height: 80vh; 
+    overflow-y: hidden;
+    min-height: 100px;
+}
+
+.smooth-dnd-container:hover{
+    overflow-y: auto;
+}

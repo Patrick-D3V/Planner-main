@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Chip, Collapse, IconButton, MenuItem, Paper, TextField, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Chip, Collapse, IconButton, MenuItem, Paper, TextField, Typography } from "@mui/material";
 import React, { Component } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { IWebservice, ITasksContainer, eSaveType } from "./Interfaces";
@@ -111,18 +111,12 @@ class Cards extends React.Component<Props, State> {
                                             className: 'drop-preview'
                                         }}
                                         dropPlaceholderAnimationDuration={200}
-                                        style={{ maxHeight: "80vh", overflowY: "auto", minHeight: "100px" }}
                                     >
                                         {column.children.map((card: any): any => {
                                             return (
                                                 <Draggable key={card.id}>
                                                     <Card id={"t" + card.id} {...card.props} sx={{ maxWidth: 345 }}>
                                                         <CardHeader
-                                                            avatar={
-                                                                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                                                    R
-                                                                </Avatar>
-                                                            }
                                                             action={
                                                                 <VMenue taskcard={card} callback={this.updateGUI.bind(this)} />
                                                             }
@@ -148,19 +142,26 @@ class Cards extends React.Component<Props, State> {
                                                                 pointerEvents: "none"
                                                             }}
                                                             component="img"
-                                                            height="194"
-                                                            image="https://placekitten.com/300/200"
+                                                            height="150"
+                                                            image="https://placekitten.com/300/150"
                                                             alt="Paella dish"
                                                         />
-                                                        <CardContent>
+                                                        {/* <CardContent>
                                                             <Typography variant="body2" color="text.secondary">
                                                                 This impressive paella is a perfect party dish and a fun meal to cook
                                                                 together with your guests. Add 1 cup of frozen peas along with the mussels,
                                                                 if you like.
                                                             </Typography>
-                                                        </CardContent>
+                                                        </CardContent> */}
                                                         <CardActions disableSpacing>
-                                                            <IconButton aria-label="add to favorites">
+                                                            <AvatarGroup max={4}>
+                                                                <Avatar alt="Remy Sharp"></Avatar>
+                                                                <Avatar alt="Travis Howard"></Avatar>
+                                                                <Avatar alt="Cindy Baker"></Avatar>
+                                                                <Avatar alt="Agnes Walker"></Avatar>
+                                                                <Avatar alt="Trevor Henderson"></Avatar>
+                                                            </AvatarGroup>
+                                                            <IconButton style={{ marginLeft: "auto" }} aria-label="add to favorites">
                                                                 <Favorite />
                                                             </IconButton>
                                                             <IconButton aria-label="share">
