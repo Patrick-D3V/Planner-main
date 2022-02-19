@@ -461,7 +461,7 @@ input:last-child{
 .smooth-dnd-container{ 
     max-height: 80vh; 
     overflow-y: hidden;
-    min-height: 100px;
+    min-height: 100px !important;
 }
 
 .smooth-dnd-container:hover{

@@ -137,7 +137,7 @@ class Cards extends React.Component<Props, State> {
                                                             }
                                                             subheader="September 14, 2016"
                                                         />
-                                                        <CardMedia
+                                                        {/* <CardMedia
                                                             sx={{
                                                                 pointerEvents: "none"
                                                             }}
@@ -145,7 +145,7 @@ class Cards extends React.Component<Props, State> {
                                                             height="150"
                                                             image="https://placekitten.com/300/150"
                                                             alt="Paella dish"
-                                                        />
+                                                        /> */}
                                                         {/* <CardContent>
                                                             <Typography variant="body2" color="text.secondary">
                                                                 This impressive paella is a perfect party dish and a fun meal to cook
@@ -153,7 +153,7 @@ class Cards extends React.Component<Props, State> {
                                                                 if you like.
                                                             </Typography>
                                                         </CardContent> */}
-                                                        <CardActions disableSpacing>
+                                                        {/* <CardActions disableSpacing>
                                                             <AvatarGroup max={4}>
                                                                 <Avatar alt="Remy Sharp"></Avatar>
                                                                 <Avatar alt="Travis Howard"></Avatar>
@@ -167,7 +167,7 @@ class Cards extends React.Component<Props, State> {
                                                             <IconButton aria-label="share">
                                                                 <Share />
                                                             </IconButton>
-                                                        </CardActions>
+                                                        </CardActions> */}
                                                     </Card>
                                                 </Draggable>
                                             );
