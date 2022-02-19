@@ -135,7 +135,7 @@ class Cards extends React.Component<Props, State> {
                                                                     }}
                                                                 />
                                                             }
-                                                            subheader="September 14, 2016"
+                                                            subheader="Heute"
                                                         />
                                                         {/* <CardMedia
                                                             sx={{
